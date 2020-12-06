@@ -13,15 +13,36 @@
 </head>
 
 <body>
+	<!-- Nav -->
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-end">
 		<a class="navbar-brand" href="#">Moderator Side</a>
 		<button class="btn btn-danger" type="button" onclick="logout()">Logout</button>
 	</nav>
+
 	<div class="container pt-3">
+		<!-- Users select -->
 		<label for="users-select">User:</label>
 		<select id="users-select" class="form-control">
 			<option>---</option>
 		</select>
+
+		<!-- Items select -->
+		<label for="items-select">Item:</label>
+		<select id="items-select" class="form-control">
+			<option>---</option>
+		</select>
+
+		<!-- Quantity change -->
+		<label for="quantity">Quantity:</label>
+		<input id="quantity" class="form-control" type="number" min="1" max="5">
+
+		<!-- Change quantity button -->
+		<button id="change-quantity-button" style="margin: 10px;" class="btn btn-primary float-right" type="button"
+			onclick="changeQuantity()">Change quantity</button>
+
+		<!-- Delete item button -->
+		<button id="delete-item-button" style="margin: 10px;" class="btn btn-danger float-right" type="button"
+			onclick="deleteItem()">Delete</button>
 	</div>
 </body>
 
