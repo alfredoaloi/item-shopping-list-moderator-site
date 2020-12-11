@@ -26,6 +26,7 @@ function fetchUsers() {
             })
         },
         error: function () {
+            logout2()
             $('#login-modal').modal('show')
         }
     });
@@ -76,7 +77,7 @@ function fetchItems(id) {
             })
         },
         error: function () {
-
+            alert('Error fetching items')
         }
     });
 }
@@ -99,7 +100,7 @@ function changeQuantity() {
     var id = $('#items-select').val()
     var quantity = $('#quantity').val()
     if (quantity < 1 || quantity > 5) {
-        // modale di errore
+        alert('The quantity should be between 1 and 5')
         return
     }
     $.ajax({
@@ -120,11 +121,12 @@ function changeQuantity() {
             withCredentials: true
         },
         success: function (response) {
+            alert('The quantity has been changed successfully!')
             location.reload()
-            // modale ok quantity
         },
         error: function () {
-
+            alert('There was an error carrying out the request')
+            location.reload()
         }
     });
 }
@@ -144,11 +146,12 @@ function deleteItem() {
             withCredentials: true
         },
         success: function (response) {
+            alert('The item has been deleted successfully!')
             location.reload()
-            // modale ok delete
         },
         error: function () {
-
+            alert('There was an error carrying out the request')
+            location.reload()
         }
     });
 }
@@ -170,10 +173,9 @@ function login() {
         },
         success: function (response) {
             $('#close-login-modal').click()
-            fetchUsers()
+            location.reload()
         },
         error: function () {
-            $('#invalid-credentials').html('Credentials are not valid!')
         }
     });
 }
@@ -195,7 +197,28 @@ function logout() {
             location.reload()
         },
         error: function () {
-            console.log('error logouting')
+            alert('Error logging out')
+        }
+    });
+}
+
+function logout2() {
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost:8000/api/v1/auth/logout/',
+        headers: {
+            'X-CSRFToken': cookieValue = document.cookie
+                .split('; ')
+                .find(row => row.startsWith('csrftoken'))
+                .split('=')[1]
+        },
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (response) {
+        },
+        error: function () {
+            alert('Error logging out')
         }
     });
 }
